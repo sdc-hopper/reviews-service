@@ -171,4 +171,29 @@ app.post('/Reviews/incrementHelpfulCount/:reviewId', (req, res) => {
 
 })
 
+// CRUD //
+
+app.get(`/Reviews/:reviewId`, async (req, res) => {
+  let review = await db.getReview(req.params.reviewId);
+  if (review !== null) {
+    res.status(200).send(review);
+  }
+  res.status(404).send();
+});
+
+app.post(`/Reviews`, async (req, res) => {
+  let reviewId = await db.createReview(req.body);
+  res.status(201).send(reviewId);
+});
+
+app.put(`/Reviews`, async (req, res) => {
+  let result = await db.updateReview(req.body);
+  res.status(201).send(result);
+});
+
+app.delete(`/Reviews`, async (req, res) => {
+  let result = await db.deleteReview(req.body);
+  res.status(201).send(result);
+});
+
 module.exports = app;

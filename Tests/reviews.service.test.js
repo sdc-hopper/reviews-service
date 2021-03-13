@@ -8,7 +8,7 @@ const SeedData = require("../database-mongoose/seeder");
 
 const ReviewsModel = Reviews.ReviewsModel;
 
-describe("Reviews module test", () => {
+xdescribe("Reviews module test", () => {
   beforeAll(async () => {
     await ReviewsModel.remove({});
   });
@@ -27,7 +27,7 @@ describe("Reviews module test", () => {
   });
 
   describe("Test insertSeedData", () => {
-    it("Inserts data", async () => {
+    xit("Inserts data", async () => {
       const mockReview = [{
         reviewId: 1005,
         productId: 1005,

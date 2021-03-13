@@ -207,6 +207,50 @@ let incrementHelpfulCount = (reviewId) => {
 
 }
 
+// CRUD Operations //
+
+const getReview = (reviewId) => {
+  return ReviewsModel.findOne({reviewId})
+  .then((result) => {
+    return new Promise((resolve, reject) => {
+      resolve(result);
+    });
+  });
+}
+
+const createReview = (review) => {
+  let newReview = new ReviewsModel(review);
+  return newReview.save()
+  .then((result) => {
+    return new Promise((resolve, reject) => {
+      resolve(result);
+    });
+  })
+  .catch((error) => {
+    return new Promise((resolve, reject) => {
+      reject(error);
+    });
+  });
+}
+
+const updateReview = (review) => {
+  return ReviewsModel.updateOne({reviewId: review.reviewId}, review)
+  .then((result) => {
+    return new Promise((resolve, reject) => {
+      resolve(result);
+    });
+  });
+}
+
+const deleteReview = (review) => {
+  return ReviewsModel.deleteOne({reviewId: review.reviewId})
+  .then((result) => {
+    return new Promise((resolve, reject) => {
+      resolve(result);
+    });
+  });
+}
+
 module.exports.insertSeedData = insertSeedData;
 module.exports.getReviews = getReviews;
 module.exports.getReviewSummary = getReviewSummary;
@@ -214,3 +258,7 @@ module.exports.getReviewExcerpts = getReviewExcerpts;
 module.exports.getReviewsByFeature = getReviewsByFeature;
 module.exports.getSearchResults = getSearchResults;
 module.exports.incrementHelpfulCount = incrementHelpfulCount;
+module.exports.createReview = createReview;
+module.exports.updateReview = updateReview;
+module.exports.deleteReview = deleteReview;
+module.exports.getReview = getReview;
