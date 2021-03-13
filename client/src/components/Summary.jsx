@@ -2,7 +2,7 @@ import React from "react";
 import SummaryRatings from './SummaryRatings.jsx';
 import SummaryByFeature from './SummaryByFeature.jsx';
 import SummaryReview from './SummaryReview.jsx';
-// import axios from 'axios';
+import axios from 'axios';
 //import './style.css';
 
 class Summary extends React.Component {

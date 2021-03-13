@@ -1,6 +1,6 @@
 # Project Name
 
-> Project description
+> SDC - Amazon Review Service
 
 ## Related Projects
 

@@ -5,7 +5,7 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const Reviews = require("../database-mongoose/reviews.model");
 
 const ReviewsModel = Reviews.ReviewsModel;
-describe("Reviews model test", () => {
+xdescribe("Reviews model test", () => {
   beforeAll(async () => {
     await ReviewsModel.remove({}); //remove all the documents from the collection before everything
   });
@@ -22,7 +22,7 @@ describe("Reviews model test", () => {
     expect(ReviewsModel).toBeDefined();
   });
 
-  describe("Saves a review", () => {
+  xdescribe("Saves a review", () => {
     it("saves review", async () => {
       const mockReview = new ReviewsModel(
         {
@@ -61,7 +61,7 @@ describe("Reviews model test", () => {
     });
   });
 
-  describe("updates review", () => {
+  xdescribe("updates review", () => {
     it("updates a review", async () => {
       const mockReview = new ReviewsModel(
         {
