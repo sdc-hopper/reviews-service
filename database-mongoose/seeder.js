@@ -1,6 +1,6 @@
 var faker = require('faker');
-let dbModel = require('./database.js');
-const ReviewService = require("../database-mongoose/reviews.service");
+//let dbModel = require('./database.js');
+//const ReviewService = require("../database-mongoose/reviews.service");
 
 let generateSeedData = (customerCount, productCount) => {
 
@@ -36,7 +36,7 @@ let generateSeedData = (customerCount, productCount) => {
       var max = 10;
       let randomIteration = Math.floor(Math.random() * (max - min + 1) + min);
       // product properties
-      var prodId = 1000 + i;
+      var prodId = i;
       var prodColor = faker.commerce.color();
       var prodConfig = faker.lorem.words();
       var prodCategory = 'Amazon Devices';
@@ -79,6 +79,8 @@ let generateSeedData = (customerCount, productCount) => {
 // var testData = generateSeedData(11, 100);//11 customers, 100 products
 // ReviewService.insertSeedData(testData);
 
+var result = generateSeedData(100, 10);
+console.log(result);
 
 module.exports.generateSeedData = generateSeedData;
 
