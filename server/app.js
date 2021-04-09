@@ -3,6 +3,7 @@ const express = require('express');
 let app = express();
 const bodyParser = require('body-parser');
 const db = require('../database-mongoose/reviews.service');
+const dbpostgres = require('../database/postgres.js');
 var cors = require('cors');
 
 app.get('*.js', (req, res, next) => {
@@ -33,24 +34,33 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-app.get('/Reviews/getReviews/:productId', (req, res) => {
+// app.get('/Reviews/getReviews/:productId', (req, res) => {
 
-  let prodId = req.params; //{id: "5"}
-  //console.log('getReviews :', prodId);
-  db.getReviews(parseInt(prodId.productId))
-    .then(results => {
-      if (results.length > 0) {
-        //console.log('results :', results);
-        res.status(200).send(results);
-      } else {
-        var reviews = [];
-        res.status(404).send(reviews);
+//   let prodId = req.params; //{id: "5"}
+//   //console.log('getReviews :', prodId);
+//   db.getReviews(parseInt(prodId.productId))
+//     .then(results => {
+//       if (results.length > 0) {
+//         //console.log('results :', results);
+//         res.status(200).send(results);
+//       } else {
+//         var reviews = [];
+//         res.status(404).send(reviews);
 
-      }
+//       }
 
-    })
-    .catch(err => console.log('err: ', err));
+//     })
+//     .catch(err => console.log('err: ', err));
+// });
+
+// postgresdb service
+
+app.get('/Reviews/getReviews/:productId', async (req, res) => {
+  console.log('params: ', req.params);
+  let result = await dbpostgres.getReviews(req.params.productId);
+  res.status(200).send(result);
 });
+
 
 app.get('/Reviews/getReviewSummary/:productId', (req, res) => {
   let prodId = req.params; //{id: "5"}
