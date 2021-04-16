@@ -1,0 +1,14 @@
+config:
+  target: "http://localhost:4006/Reviews"
+  phases:
+    - duration: 1
+      arrivalRate: 1000
+  payload:
+    path: "reviews.csv"
+    fields:
+      - "productId"
+scenarios:
+  - name: "Get Reviews"
+    flow:
+      - get:
+          url: "/getReviews/{{ productId }}"
