@@ -4,6 +4,9 @@ let app = express();
 const bodyParser = require('body-parser');
 //const db = require('../database-mongoose/reviews.service');
 const dbpostgres = require('../database/postgres.js');
+const redis = require("redis");
+const redisPort = 6379
+const client = redis.createClient(redisPort);
 var cors = require('cors');
 
 app.get('*.js', (req, res, next) => {
@@ -56,9 +59,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // postgresdb service
 
 app.get('/Reviews/getReviews/:productId', async (req, res) => {
-  console.log('params: ', req.params);
-  let result = await dbpostgres.getReviews(req.params.productId);
-  res.status(200).send(result);
+  const searchTerm = req.params.productId;
+  client.get(searchTerm, async (err, product) => {
+    if (err) throw err;
+
+    if (product) {
+      res.status(200).send(JSON.parse(product));
+    }
+    else {
+        const product = await dbpostgres.getReviews(req.params.productId);
+        client.setex(searchTerm, 600, JSON.stringify(product));
+        res.status(200).send(product);
+    }
+});
+  // let result = await dbpostgres.getReviews(req.params.productId);
+  // res.status(200).send(result);
 });
 
 
