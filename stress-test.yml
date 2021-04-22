@@ -1,5 +1,5 @@
 config:
-  target: "http://localhost:4006/Reviews"
+  target: "http://ec2-3-140-254-7.us-east-2.compute.amazonaws.com:4006/Reviews"
   phases:
     - duration: 1
       arrivalRate: 1000
